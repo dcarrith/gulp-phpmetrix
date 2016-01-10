@@ -30,6 +30,8 @@ var phpmetrix = function(options) {
 	options = options || {};
 	args = options.args || [];
 
+	console.log(options);
+
 	return es.through(function(file) {
 		files.push(file.path);
 		this.push(file);
