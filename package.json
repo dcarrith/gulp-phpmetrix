@@ -1,10 +1,11 @@
 {
   "name": "gulp-phpmetrix",
   "version": "1.0.0",
-  "description": "A helper for phpmetrics and gulp",
+  "description": "A helper connecting the phpmetrix node wrapper around phpmetrics and gulp",
   "keywords": [
     "gulpfriendly",
-    "phpmetrics"
+    "phpmetrics",
+    "phpmetrix"
   ],
   "homepage": "https://github.com/dcarrith/gulp-phpmetrix",
   "bugs": "https://github.com/dcarrith/gulp-phpmetrix/issues",
