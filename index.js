@@ -24,53 +24,40 @@ function getPhpmetricsDir() {
 }
 
 var phpmetrix = function(options) {
-	var files = [],
-		child, args;
+    var child, args;
 
-	options = options || {};
-	args = options.args || [];
+    options = options || {};
+    args = options.args || [];
 
-	console.log(options);
+    console.log(args);
 
-	return es.through(function(file) {
-		files.push(file.path);
-		this.push(file);
-	}, function() {
-		var stream = this;
+    return es.through(function(config) {
+        this.push(config);
+    }, function() {
+        var stream = this;
 
-		// Enable debug mode
-		if (options.debug) {
-			args.push('debug');
-		}
+        // Pass in the config file
+        if (options.configFile) {
+            args.unshift(options.configFile);
+        }
 
-		// Attach Files, if any
-		if (files.length) {
-			args.push('--specs');
-			args.push(files.join(','));
-		}
-
-		// Pass in the config file
-		if (options.configFile) {
-			args.unshift(options.configFile);
-		}
-
-		child = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
-			stdio: 'inherit',
-			env: process.env
-		}).on('exit', function(code) {
-			if (child) {
-				child.kill();
-			}
-			if (stream) {
-				if (code) {
-					stream.emit('error', new PluginError('gulp-phpmetrix', 'phpmetrix exited with code ' + code));
-				}
-				else {
-					stream.emit('end');
-				}
-			}
-		});
-	});
+        child = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
+            stdio: 'inherit',
+            env: process.env
+        }).on('exit', function(code) {
+            if (child) {
+                child.kill();
+            }
+            if (stream) {
+                if (code) {
+                    stream.emit('error', new PluginError('gulp-phpmetrix', 'phpmetrix exited with code ' + code));
+                }
+                else {
+                    stream.emit('end');
+                }
+            }
+        });
+    });
 };
 
 module.exports = {
