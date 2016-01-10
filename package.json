@@ -1,0 +1,48 @@
+{
+  "name": "gulp-phpmetrix",
+  "version": "1.0.0",
+  "description": "A helper for phpmetrics and gulp",
+  "keywords": [
+    "gulpfriendly",
+    "phpmetrics"
+  ],
+  "homepage": "https://github.com/dcarrith/gulp-phpmetrix",
+  "bugs": "https://github.com/dcarrith/gulp-phpmetrix/issues",
+  "author": {
+    "name": "David Carrithers",
+    "email": "",
+    "url": "https://github.com/dcarrith"
+  },
+  "contributors": [
+    {
+    }
+  ],
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dcarrith/gulp-phpmetrix.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "async": "~1.5.0",
+    "dargs": "~4.0.1",
+    "event-stream": "~3.3.0",
+    "gulp-util": ">=2.2.14 <4.0.0"
+  },
+  "devDependencies": {
+    "mocha": ">=1.18.2 <3.0.0",
+    "sinon": "~1.17.0",
+    "expect.js": "~0.3.1"
+  },
+  "engines": {
+    "node": ">=0.10.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
