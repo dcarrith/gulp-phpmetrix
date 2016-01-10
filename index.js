@@ -5,9 +5,10 @@ var child_process = require('child_process');
 var async = require('async');
 var PluginError = require('gulp-util').PluginError;
 var winExt = /^win/.test(process.platform)?".cmd":"";
+var console = require('console');
 
 // optimization: cache for phpmetrics binaries directory
-var phpmetricsDir = null;
+var phpmetricsDir = "/usr/local/bin/phpmetrics";
 
 function getPhpmetricsDir() {
 	if (phpmetricsDir) {
@@ -19,10 +20,12 @@ function getPhpmetricsDir() {
 		phpmetricsDir = path.resolve(path.join(path.dirname(result), "..", ".bin"));
 		return phpmetricsDir;
 	}
-	throw new Error("No phpmetrics installation found.");
+	throw new Error("No phpmetrix installation found.");
 }
 
 var phpmetrix = function(options) {
+	console.log(options);
+	
 	var files = [],
 		child, args;
 
@@ -34,17 +37,6 @@ var phpmetrix = function(options) {
 		this.push(file);
 	}, function() {
 		var stream = this;
-
-		// Enable debug mode
-		if (options.debug) {
-			args.push('debug');
-		}
-
-		// Attach Files, if any
-		if (files.length) {
-			args.push('--specs');
-			args.push(files.join(','));
-		}
 
 		// Pass in the config file
 		if (options.configFile) {
