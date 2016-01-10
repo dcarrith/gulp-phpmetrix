@@ -54,7 +54,7 @@ var phpmetrix = function(options) {
 			args.unshift(options.configFile);
 		}
 
-		child = child_process.spawn(path.resolve(getPhpmetrixDir() + '/phpmetrix'+winExt), args, {
+		child = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
 			stdio: 'inherit',
 			env: process.env
 		}).on('exit', function(code) {
