@@ -24,8 +24,6 @@ function getPhpmetricsDir() {
 }
 
 var phpmetrix = function(options) {
-	console.log(options);
-	
 	var files = [],
 		child, args;
 
@@ -38,12 +36,23 @@ var phpmetrix = function(options) {
 	}, function() {
 		var stream = this;
 
+		// Enable debug mode
+		if (options.debug) {
+			args.push('debug');
+		}
+
+		// Attach Files, if any
+		if (files.length) {
+			args.push('--specs');
+			args.push(files.join(','));
+		}
+
 		// Pass in the config file
 		if (options.configFile) {
 			args.unshift(options.configFile);
 		}
 
-		child = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
+		child = child_process.spawn(path.resolve(getPhpmetrixDir() + '/phpmetrix'+winExt), args, {
 			stdio: 'inherit',
 			env: process.env
 		}).on('exit', function(code) {
