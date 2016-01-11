@@ -24,17 +24,17 @@ function getPhpmetricsDir() {
 }
 
 var phpmetrix = function(options) {
-    var child, conf;
+    var child, args;
 
     options = options || {};
-    conf = options.conf || 'phpmetrix.yml';
+    args = options.args || [{'conf': 'phpmetrics.yml'}];
 
     return es.through(function(conf) {
         this.push(conf);
     }, function() {
         var stream = this;
 
-        phpmetrix = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), conf, {
+        phpmetrix = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
             stdio: [
                 0, // Use parents stdin for child
 				'pipe', // Pipe child's stdout to parent
