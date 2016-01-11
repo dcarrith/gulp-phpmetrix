@@ -45,14 +45,6 @@ var phpmetrix = function(options) {
             stdio: 'inherit',
             env: process.env
         });
-        
-        phpmetrix.stdout.on('data', (data) => {
-			console.log(`stdout: ${data}`);
-		});
-
-		phpmetrix.stderr.on('data', (data) => {
-			console.log(`stderr: ${data}`);
-		});
 
 		phpmetrix.on('close', (code) => {
 			console.log(`child process exited with code ${code}`);
