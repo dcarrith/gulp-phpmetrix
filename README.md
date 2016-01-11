@@ -1,5 +1,3 @@
-# gulp-phpmetrix [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
-
 > Run your [phpmetrics](https://github.com/Halleck45/PhpMetrics) analysis with [gulp](https://github.com/wearefractal/gulp)
 
 ## Usage
@@ -7,7 +5,7 @@
 First, install `gulp-phpmetrix` as a development dependency:
 
 ```shell
-npm install --save-dev gulp-phpmetrix
+npm install gulp-phpmetrix --save-dev
 ```
 
 Then, add it to your `gulpfile.js`:
