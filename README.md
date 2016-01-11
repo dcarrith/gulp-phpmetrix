@@ -13,14 +13,15 @@ npm install --save-dev gulp-phpmetrix
 Then, add it to your `gulpfile.js`:
 
 ```javascript
+// Vanilla gulp task to run phpmetrics
+var gulp = require('gulp');
+
 var phpmetrix = require("gulp-phpmetrix").phpmetrix;
 
-gulp.src(["./src/tests/*.js"])
-	.pipe(phpmetrix({
-		configFile: "config.yml",
-		args: ['config.yml']
-	}))
-	.on('error', function(e) { throw e })
+gulp.src('')
+    .pipe(phpmetrix('phpmetrix.yml'))
+    .on('error', function(e) { throw e });
+
 ```
 
 ## License
