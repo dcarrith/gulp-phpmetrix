@@ -23,7 +23,32 @@ gulp.src('')
     .on('error', function(e) { throw e });
 
 ```
+## Example phpmetrix.yml
+```shell
+default:
+    rules:
+        cyclomaticComplexity: [ 10, 6, 2 ]
+        maintainabilityIndex: [ 0, 75, 95 ]
 
+    failure: average.maintainabilityIndex < 50 or sum.loc > 10000
+
+    path:
+        directory: .
+        extensions: php
+        exclude: grunt|node_modules|public|storage|vendor
+
+    logging:
+        report:
+            #cli:    true
+            xml:    ./public/reports/phpmetrics.xml
+            html:   ./public/reports/phpmetrics.html
+            csv:    ./public/reports/phpmetrics.csv
+        violations:
+            xml:    ./public/reports/violations.xml
+        chart:
+            bubbles: ./public/reports/bubbles.svg
+
+```
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
