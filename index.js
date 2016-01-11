@@ -45,7 +45,7 @@ var phpmetrix = function(options) {
             stdio: [
                 0, // Use parents stdin for child
 				'pipe', // Pipe child's stdout to parent
-    			fs.openSync('err.out', 'w') // Direct child's stderr to a file
+    			'pipe', // Pipe child's stderr to parent // fs.openSync('err.out', 'w') // Direct child's stderr to a file
     		],
             env: process.env
         });
