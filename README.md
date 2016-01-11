@@ -21,7 +21,7 @@ gulp.src('')
     .on('error', function(e) { throw e });
 
 ```
-## Example phpmetrix.yml
+Then add a phpmetrix.yml to the root of your site.  Here's an example:
 ```shell
 default:
     rules:
