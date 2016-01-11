@@ -26,13 +26,17 @@ function getPhpmetricsDir() {
 var phpmetrix = function(options) {
     var child, args;
 
-    options = options || { args: { conf: 'phpmetrics.yml' }};
-    args = options.args || { conf: 'phpmetrics.yml' };
+	options = options || {};
+	args = options.args || [];
 
-    return es.through(function(options) {
-        this.push(options);
+    return es.through(function(config) {
+        this.push(config);
     }, function() {
         var stream = this;
+
+		if (options.configFile) {
+ 			args.unshift(options.configFile);
+		}
 
         phpmetrix = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
             stdio: [
