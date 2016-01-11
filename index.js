@@ -41,10 +41,24 @@ var phpmetrix = function(options) {
             args.unshift(options.configFile);
         }
 
-        child = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
+        phpmetrix = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
             stdio: 'inherit',
             env: process.env
-        }).on('exit', function(code) {
+        });
+        
+        phpmetrix.stdout.on('data', (data) => {
+			console.log(`stdout: ${data}`);
+		});
+
+		phpmetrix.stderr.on('data', (data) => {
+			console.log(`stderr: ${data}`);
+		});
+
+		phpmetrix.on('close', (code) => {
+			console.log(`child process exited with code ${code}`);
+		});
+
+        phpmetrix.on('exit', function(code) {
             if (child) {
                 child.kill();
             }
