@@ -34,11 +34,6 @@ var phpmetrix = function(options) {
     }, function() {
         var stream = this;
 
-        // Pass in the config file
-        if (options.conf) {
-            args.unshift(options.conf);
-        }
-
         phpmetrix = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), conf, {
             stdio: [
                 0, // Use parents stdin for child
