@@ -42,7 +42,11 @@ var phpmetrix = function(options) {
         }
 
         phpmetrix = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
-            stdio: 'inherit',
+            stdio: [
+                0, // Use parents stdin for child
+				'pipe', // Pipe child's stdout to parent
+    			fs.openSync('err.out', 'w') // Direct child's stderr to a file
+    		],
             env: process.env
         });
         
