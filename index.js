@@ -11,55 +11,67 @@ var console = require('console');
 var phpmetricsDir = null;
 
 function getPhpmetricsDir() {
-	if (phpmetricsDir) {
-		return phpmetricsDir;
-	}
-	var result = require.resolve("phpmetrix");
-	if (result) {
-		// result is now something like
-		phpmetricsDir = path.resolve(path.join(path.dirname(result), "..", ".bin"));
-		return phpmetricsDir;
-	}
-	throw new Error("No phpmetrix installation found.");
+    if (phpmetricsDir) {
+        return phpmetricsDir;
+    }
+    var result = require.resolve("phpmetrix");
+    if (result) {
+        // result is now something like
+        phpmetricsDir = path.resolve(path.join(path.dirname(result), "..", ".bin"));
+        return phpmetricsDir;
+    }
+    throw new Error("No phpmetrix installation found.");
 }
 
-var phpmetrix = function(options) {
+var phpmetrix = function(config) {
+
     var child, args;
 
-	options = options || {};
-	args = options.args || [];
+    // Make sure we have a good default config
+    conf = config || 'phpmetrix.yml';
 
-    return es.through(function(config) {
-        this.push(config);
-    }, function() {
+    return es.through(function write(data) {
+
+        this.push(data);
+
+    }, function end() {
+
         var stream = this;
 
-		if (options.configFile) {
- 			args.unshift(options.configFile);
-		}
-
-        phpmetrix = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), args, {
+        child = child_process.spawn(path.resolve(getPhpmetricsDir() + '/phpmetrix'+winExt), [ conf ], {
             stdio: [
                 0, // Use parents stdin for child
-				'pipe', // Pipe child's stdout to parent
-    			'pipe', // Pipe child's stderr to parent // fs.openSync('err.out', 'w') // Direct child's stderr to a file
-    		],
+                'pipe', // Pipe child's stdout to parent
+                null, // Pipe child's stderr to parent // fs.openSync('err.out', 'w') // Direct child's stderr to a file
+            ],
             env: process.env
         });
-        
-        phpmetrix.stdout.on('data', (data) => {
-			console.log(`stdout: ${data}`);
-		});
 
-		phpmetrix.stderr.on('data', (data) => {
-			console.log(`stderr: ${data}`);
-		});
+        child.stdout.on( 'data', function( data ) {
 
-		phpmetrix.on('close', (code) => {
-			console.log(`child process exited with code ${code}`);
-		});
+            // Here data will still be binary, so we need to call toString and then trim on it.
+            var dataString = data.toString().trim();
 
-        phpmetrix.on('exit', function(code) {
+            if( dataString !== '' ) {
+                console.log( dataString );
+            }
+        });
+
+        child.stderr.on('data', function( data ) {
+
+            // Here data will still be binary, so we need to call toString and then trim on it.
+            var dataString = data.toString().trim();
+
+            if( dataString !== '' ) {
+                console.log( dataString );
+            }
+        });
+
+        child.on('close', function( code ) {
+            //console.log('child process was closed with code:' + code);
+        });
+
+        child.on('exit', function( code ) {
             if (child) {
                 child.kill();
             }
@@ -76,6 +88,6 @@ var phpmetrix = function(options) {
 };
 
 module.exports = {
-	getPhpmetricsDir: getPhpmetricsDir,
-	phpmetrix: phpmetrix
+    getPhpmetricsDir: getPhpmetricsDir,
+    phpmetrix: phpmetrix
 };
