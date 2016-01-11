@@ -26,11 +26,11 @@ function getPhpmetricsDir() {
 var phpmetrix = function(options) {
     var child, args;
 
-    options = options || {};
-    args = options.args || [{'conf': 'phpmetrics.yml'}];
+    options = options || { args: { conf: 'phpmetrics.yml' }};
+    args = options.args || { conf: 'phpmetrics.yml' };
 
-    return es.through(function(conf) {
-        this.push(conf);
+    return es.through(function(options) {
+        this.push(options);
     }, function() {
         var stream = this;
 
