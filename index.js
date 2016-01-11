@@ -8,7 +8,7 @@ var winExt = /^win/.test(process.platform)?".cmd":"";
 var console = require('console');
 
 // optimization: cache for phpmetrics binaries directory
-var phpmetricsDir = "/usr/local/bin/phpmetrics";
+var phpmetricsDir = null;
 
 function getPhpmetricsDir() {
 	if (phpmetricsDir) {
