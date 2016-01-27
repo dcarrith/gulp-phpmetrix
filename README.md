@@ -1,10 +1,9 @@
 > Run your [phpmetrics](https://github.com/Halleck45/PhpMetrics) analysis with [gulp](https://github.com/wearefractal/gulp)
 
-[![npm](http://img.shields.io/npm/v/phplint.svg?style=flat)](https://www.npmjs.com/package/phplint)
+[![npm](http://img.shields.io/npm/v/gulp-phpmetrix.svg?style=flat)](https://www.npmjs.com/package/gulp-phpmetrix)
 [![Build Status](https://travis-ci.org/dcarrith/gulp-phpmetrix.svg?branch=master)](https://travis-ci.org/dcarrith/gulp-phpmetrix)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
-[![Dependency Status](https://david-dm.org/wayneashleyberry/phplint/status.svg?style=flat)](https://david-dm.org/wayneashleyberry/phplint#info=dependencies)
-[![devDependency Status](https://david-dm.org/wayneashleyberry/phplint/dev-status.svg?style=flat)](https://david-dm.org/wayneashleyberry/phplint#info=devDependencies)
+[![Dependency Status](https://david-dm.org/dcarrith/gulp-phpmetrix.svg)](https://david-dm.org/dcarrith/gulp-phpmetrix)
+[![devDependency Status](https://david-dm.org/dcarrith/gulp-phpmetrix/dev-status.svg)](https://david-dm.org/dcarrith/gulp-phpmetrix#info=devDependencies)
 [![Coverage Status](https://coveralls.io/repos/github/dcarrith/gulp-phpmetrix/badge.svg?branch=master)](https://coveralls.io/github/dcarrith/gulp-phpmetrix?branch=master)
 
 ## Usage
