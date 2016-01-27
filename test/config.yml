@@ -1,0 +1,23 @@
+default:
+    rules:
+        cyclomaticComplexity: [ 10, 6, 2 ]
+        maintainabilityIndex: [ 0, 75, 95 ]
+
+    failure: average.maintainabilityIndex < 50 or sum.loc > 10000
+
+    path:
+        directory: .
+        extensions: php
+        exclude: grunt|node_modules|public|storage|vendor
+
+    logging:
+        report:
+            #cli: true
+            xml:    ./test/reports/phpmetrics.xml
+            html:   ./test/reports/phpmetrics.html
+            json:   ./test/reports/phpmetrics.json
+            csv:    ./test/reports/phpmetrics.csv
+        violations:
+            xml:    ./test/reports/violations.xml
+        chart:
+            bubbles: ./test/reports/bubbles.svg
