@@ -99,9 +99,9 @@ function generateTestValueFromOptions( options ) {
 describe( 'gulp-phpmetrix: getPhpmetricsDir', function() {
 
     it('should find the phpmetrics installation', function( done ) {
-                expect( getPhpmetricsDir() ).to.equal( path.resolve( '../.bin' ));
-                done();
-        });
+        expect( getPhpmetricsDir() ).to.equal(path.resolve('./node_modules/.bin'));
+        done();
+    });
 });
 
 describe( 'gulp-phpmetrix: phpmetrix', function() {
