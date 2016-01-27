@@ -2,19 +2,18 @@ language: node_js
 before_install:
   - sudo add-apt-repository -y ppa:ondrej/php5
   - sudo apt-get update -qq
-  - sudo apt-get install -y php5 php5-cli
+  - sudo apt-get install -y php5 php5-cli graphviz
+  - curl -sS https://getcomposer.org/installer | php
+  - php composer.phar global require 'halleck45/phpmetrics'
+  - export PATH=$PATH:~/.composer/vendor/bin
   - npm install
   - npm install -g mocha
-  - npm install -g phpmetrix
-  - npm install expect.js sinon
-  - npm install bin-check
+  - npm install bin-check expect.js sinon
 node_js:
-  - "4.1"
-  - "4.0"
-  - "0.12"
-  - "0.11"
-  - '0.10'
+  - stable
+  - 4.2
+  - 0.10
+  - 0.12
 scripts: {
   "test": "./node_modules/mocha/bin/mocha"
 }
-
