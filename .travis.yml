@@ -8,7 +8,7 @@ before_install:
   - export PATH=$PATH:~/.composer/vendor/bin
   - npm install
   - npm install -g mocha
-  - npm install bin-check expect.js sinon
+  - npm install bin-check expect.js sinon phpmetrix
 node_js:
   - stable
   - 4.2
